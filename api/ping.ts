@@ -29,10 +29,8 @@ export default async function handler(
 
     const sql = getSQL();
     await sql`
-      INSERT INTO pings (instance_id, mod_id, mod_version, ping_date)
-      VALUES (${instance_id}, ${mod_id}, ${mod_version}, CURRENT_DATE)
-      ON CONFLICT (instance_id, mod_id, ping_date)
-      DO UPDATE SET mod_version = ${mod_version}, updated_at = NOW()
+      INSERT INTO pings (instance_id, mod_id, mod_version)
+      VALUES (${instance_id}, ${mod_id}, ${mod_version})
     `;
 
     res.status(200).json({ ok: true });

@@ -21,7 +21,7 @@ export default async function handler(
     const dauResult = await sql`
       SELECT mod_id, COUNT(DISTINCT instance_id)::int as dau
       FROM pings
-      WHERE ping_date = ${dateStr}
+      WHERE created_at::date = ${dateStr}::date
       GROUP BY mod_id
       ORDER BY dau DESC
     `;
@@ -29,7 +29,7 @@ export default async function handler(
     const versionResult = await sql`
       SELECT mod_id, mod_version, COUNT(DISTINCT instance_id)::int as users
       FROM pings
-      WHERE ping_date = ${dateStr}
+      WHERE created_at::date = ${dateStr}::date
       GROUP BY mod_id, mod_version
       ORDER BY mod_id, users DESC
     `;
@@ -37,7 +37,7 @@ export default async function handler(
     const totalResult = await sql`
       SELECT COUNT(DISTINCT instance_id)::int as total
       FROM pings
-      WHERE ping_date = ${dateStr}
+      WHERE created_at::date = ${dateStr}::date
     `;
 
     const totalUsers = totalResult.rows[0]?.total ?? 0;

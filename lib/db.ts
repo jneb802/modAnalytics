@@ -14,13 +14,11 @@ CREATE TABLE IF NOT EXISTS pings (
     instance_id   VARCHAR(50) NOT NULL,
     mod_id        VARCHAR(100) NOT NULL,
     mod_version   VARCHAR(20) NOT NULL,
-    ping_date     DATE NOT NULL DEFAULT CURRENT_DATE,
-    created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    CONSTRAINT uq_ping_per_day UNIQUE (instance_id, mod_id, ping_date)
+    created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_pings_mod_date ON pings (mod_id, ping_date);
+CREATE INDEX IF NOT EXISTS idx_pings_mod_date ON pings (mod_id, (created_at::date));
+CREATE INDEX IF NOT EXISTS idx_pings_instance ON pings (instance_id, mod_id);
 `;
 
 // Friendly display names for Discord reports
