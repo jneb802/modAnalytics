@@ -1,0 +1,10 @@
+{
+  "framework": null,
+  "buildCommand": "npm run lint",
+  "crons": [
+    {
+      "path": "/api/cron/daily-report",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}

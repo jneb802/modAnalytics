@@ -1,11 +1,16 @@
-# Build outputs
-bin/
-obj/
+# Dependencies
+node_modules/
 
-# Log files
-logoutput.log
+# Build
+.vercel/
+dist/
 
-# IDE files
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
 .vs/
 .vscode/
 .idea/
@@ -13,22 +18,13 @@ logoutput.log
 *.user
 *.suo
 
-# Rider
-/shelf/
-/workspace.xml
-/modules.xml
-/contentModel.xml
-*.iml
-/projectSettingsUpdater.xml
-/queries/
-/dataSources/
-/dataSources.local.xml
-/httpRequests/
-
 # macOS
 .DS_Store
 
-# Temporary files
+# Logs
+*.log
+
+# Temporary
 *.tmp
 *.temp
 
