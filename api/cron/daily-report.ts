@@ -42,9 +42,21 @@ export default async function handler(
 
     const totalUsers = totalResult.rows[0]?.total ?? 0;
 
+    function compareVersions(a: string, b: string): number {
+      const pa = a.split('.').map(Number);
+      const pb = b.split('.').map(Number);
+      for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+        const na = pa[i] ?? 0;
+        const nb = pb[i] ?? 0;
+        if (nb !== na) return nb - na;
+      }
+      return 0;
+    }
+
     function versionBreakdown(modId: string): string {
       return versionResult.rows
         .filter((r) => r.mod_id === modId)
+        .sort((a, b) => compareVersions(a.mod_version as string, b.mod_version as string))
         .map((r) => `v${r.mod_version}: ${r.users}`)
         .join('\n');
     }
